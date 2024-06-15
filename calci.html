@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .calculator {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .calculator .btn {
+            width: 70px;
+            height: 70px;
+        }
+        .display {
+            height: 70px;
+            margin-bottom: 20px;
+            text-align: right;
+            padding: 10px;
+            font-size: 24px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="calculator">
+        <div id="display" class="display">0</div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-secondary" onclick="clearDisplay()">C</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" onclick="appendToDisplay('(')">(</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" onclick="appendToDisplay(')')">)</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" onclick="appendToDisplay('/')">/</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('7')">7</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('8')">8</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('9')">9</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" onclick="appendToDisplay('*')">*</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('4')">4</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('5')">5</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('6')">6</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" onclick="appendToDisplay('-')">-</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('1')">1</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('2')">2</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('3')">3</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" onclick="appendToDisplay('+')">+</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('0')">0</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light" onclick="appendToDisplay('.')">.</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-light" onclick="deleteLast()">DEL</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" onclick="calculate()">=</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+    // Function to clear the display
+    function clearDisplay() {
+        document.getElementById('display').innerText = '0';
+    }
+
+    // Function to append to the display
+    function appendToDisplay(value) {
+        let display = document.getElementById('display');
+        if (display.innerText === '0') {
+            display.innerText = value;
+        } else {
+            display.innerText += value;
+        }
+    }
+
+    // Function to delete the last character from the display
+    function deleteLast() {
+        let display = document.getElementById('display');
+        display.innerText = display.innerText.slice(0, -1);
+        if (display.innerText === '') {
+            display.innerText = '0';
+        }
+    }
+
+    // Function to perform the calculation
+    function calculate() {
+        let display = document.getElementById('display');
+        try {
+            display.innerText = eval(display.innerText);
+        } catch (e) {
+            display.innerText = 'Error';
+        }
+    }
+</script>
+
+</body>
+</html>
